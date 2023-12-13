@@ -49,25 +49,19 @@ def checkForQuer():
     return False
 
 def checkForVerticalWin():
-    i = 0
     vertical = (0,1,2)
     for x in vertical:
         if field[x] != 0:
             if field[x] == field[x+3] and field[x] == field[x+6]:
                 return True
-        elif i == 2:
-            return False
-        i += 1
 
 def checkForHorizontalWin():
-    i = 0
     horizontal = (0,3,6)
     for x in horizontal:
             if field[x] != 0:
                 if field[x] == field[x + 1] and field[x] == field[x + 2]:
                     return True
-            elif i == 2:
-                return False
+    return False
 
 def checkForDraw():
     for x in field:
@@ -75,20 +69,25 @@ def checkForDraw():
             return False
     return True
 
+def printIntroduction():
+    print('Your goal is to be the first one to have 3 connectet chars')
+    print('You tell me where u wante to place your char by inputting y,x')
+    print('For example the second char in the first row would be presented by 1,2')
+    
+# Var definition
 field = [0,0,0,
          0,0,0,
          0,0,0]
-
 
 playerOneChar = 'X'
 playerTwoChar = 'O'
 playersTurn = playerOneChar
 gameNotFinished = True
 
-print('Your goal is to be the first one to have 3 connectet chars')
-print('You tell me where u wante to place your char by inputting y,x')
-print('For example the second char in the first row would be presented by 1,2')
+#Play loop 
+#-----------------------------------------
 
+printIntroduction()
 printField(field)
 
 while(gameNotFinished):
@@ -106,3 +105,4 @@ while(gameNotFinished):
         playersTurn = playerOneChar
 
 #TODO add possibility to choose your player
+#TODO add an enemy AI
