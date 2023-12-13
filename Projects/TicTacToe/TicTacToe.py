@@ -94,7 +94,7 @@ while(gameNotFinished):
     takeAndCheckInput()
     printField(field)
     if checkForWin():
-        print('Congrats to '  + playersTurn + 'You Won')
+        print('Congrats to '  + playersTurn + ' You Won')
         gameNotFinished = False
     if checkForDraw():
         print('You drawed')
