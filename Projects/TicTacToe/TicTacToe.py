@@ -3,9 +3,9 @@ def printField(field):
     row = 0
     for x in field:
         if x == 0:
-            print("   ",end="")
+            print('   ',end='')
         else:
-            print('|' + x + '|',end="")
+            print('|' + x + '|',end='')
         row += 1
         if row%3 == 0:
             print(' ')
