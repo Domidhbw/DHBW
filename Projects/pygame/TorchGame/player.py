@@ -21,4 +21,5 @@ class Player():
             self.playerPos.x += self.speed
 
     def wallHit(self):
+        ##Add Collision
         pass
