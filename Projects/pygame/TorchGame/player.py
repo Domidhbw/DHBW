@@ -22,4 +22,5 @@ class Player():
 
     def wallHit(self):
         ##Add Collision
+        #https://www.metanetsoftware.com/technique/tutorialA.html
         pass
