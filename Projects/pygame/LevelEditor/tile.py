@@ -2,8 +2,8 @@ import pygame
 
 class Tile:
     def __init__(self,left,top,color) -> None:
-        self.heigth = 50
-        self.width = 50
+        self.heigth = 1
+        self.width = 1
         self.rectangle = pygame.rect.Rect(left,top,self.width,self.heigth)
         self.color = color
 

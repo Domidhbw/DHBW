@@ -1,38 +1,21 @@
 import pygame
-from tile import Tile
+from listGenerator import LevelGenerator
 
 pygame.init()
-screen = pygame.display.set_mode((500, 250))
+screen = pygame.display.set_mode((700, 350))
 clock = pygame.time.Clock()
 running = True
 
-xForTile = 0
-yForTile = 0
-
-level = open("testLevel.txt","r").read()
-listOfTiles = list()
-
-for char in level:
-    match char:
-        case "x":
-            listOfTiles.append(Tile(xForTile,yForTile,"Blue"))
-            xForTile += 50
-        case "o":
-            listOfTiles.append(Tile(xForTile,yForTile,"Black"))
-            xForTile += 50
-        case ",":
-            xForTile = 0
-            yForTile += 50
-
+level = LevelGenerator("testLevel.txt",pygame.display.get_surface())
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill("black")
-
-    for tile in listOfTiles:
+    
+    for tile in level.level:
+        tile.rectangle.update(tile.rectangle.left,tile.rectangle.top,level.tileScale[1],level.tileScale[0])
         tile.draw(screen)
     # RENDER YOUR GAME HERE
 
