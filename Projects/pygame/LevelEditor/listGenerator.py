@@ -29,6 +29,9 @@ class LevelGenerator:
                 case "o":
                     level.append(Tile(origin.x,origin.y,"Black"))
                     origin.x += self.tileScale[1]
+                case "i":
+                    level.append(Tile(origin.x,origin.y,"Green"))
+                    origin.x += self.tileScale[1]
                 case ",":
                     origin.x = 0
                     origin.y += self.tileScale[0]
