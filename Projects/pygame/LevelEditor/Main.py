@@ -2,7 +2,7 @@ import pygame
 from listGenerator import LevelGenerator
 
 pygame.init()
-screen = pygame.display.set_mode((700, 350))
+screen = pygame.display.set_mode((1200, 600))
 clock = pygame.time.Clock()
 running = True
 
