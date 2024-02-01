@@ -1,23 +1,29 @@
 import pygame
 from listGenerator import LevelGenerator
+from menu import selectMenu
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 600))
 clock = pygame.time.Clock()
 running = True
 
-level = LevelGenerator("testLevel.txt",pygame.display.get_surface())
+level = LevelGenerator()
+menu = selectMenu()
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            menu.handleMouse(pygame.mouse.get_pos())
     
-    for tile in level.level:
-        tile.rectangle.update(tile.rectangle.left,tile.rectangle.top,level.tileScale[1],level.tileScale[0])
-        tile.draw(screen)
-    # RENDER YOUR GAME HERE
+    level.update()
+
+    screen.fill('black')
+
+    level.drawLevel(screen)
+    menu.drawMenu(screen)
+    menu.drawTheTilesOnTheMenu(screen)
 
     pygame.display.flip()
 

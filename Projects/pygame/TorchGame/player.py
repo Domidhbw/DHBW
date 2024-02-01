@@ -1,5 +1,5 @@
 import pygame
-from bullet import Bullet
+
 
 class Player():
     def __init__(self) -> None:
@@ -8,7 +8,7 @@ class Player():
         self.speed = 5
         self.rect = pygame.Rect(self.playerPos.x, self.playerPos.y, 55,55)
         self.direction = pygame.Vector2(0,0)
-        self.bullets = []
+
     
     def getInput(self):
         self.direction = pygame.Vector2(0,0)
@@ -34,7 +34,3 @@ class Player():
         self.rect.x += self.direction.x * self.speed
         self.rect.y += self.direction.y * self.speed
 
-    def shoot(self, targetx,targety):
-        bullet_direction = pygame.Vector2(targetx - self.rect.centerx, targety - self.rect.centery)
-        bullet_direction.normalize_ip()
-        self.bullets.append(Bullet(self.rect.centerx, self.rect.centery, bullet_direction))  

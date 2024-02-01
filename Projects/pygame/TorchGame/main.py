@@ -24,6 +24,8 @@ leftWall = Wall(0,0,20,HEIGHT)
 rightWall = Wall(WIDTH-20,0,20,HEIGHT)
 walls = [topWall, bottomWall, leftWall, rightWall]
 ememy = Enemy(player.rect)
+direction = -20
+onOrOff = True
 
 collisionHandler = collisionHandler()
 
@@ -31,10 +33,13 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Left mouse button
-                    target_x, target_y = pygame.mouse.get_pos()
-                    player.shoot(target_x, target_y)
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_f]:
+        if onOrOff:
+            onOrOff = False
+        else:
+            onOrOff = True
 
     # Update game objects
     player.getInput()
@@ -42,15 +47,19 @@ while running:
     ememy.chasePlayer()
     # Draw everything on the screen
     screen.fill((0, 0, 0))  
-    for bullet in player.bullets:
-        bullet.updatePosition()
-        
+
+
+    if player.direction.x > 0:
+        direction = 80
+    elif player.direction.x < 0:
+        direction = -20
+
+    pygame.draw.rect(screen,ememy.color,ememy.rect)
     pygame.draw.rect(screen,'green',player.rect)
-    pygame.draw.rect(screen,'green',ememy.rect)
+    if onOrOff:
+        pygame.draw.polygon(screen, (0, 255, 255), ((player.rect.center),(player.rect.x + direction,player.rect.y - 60),(player.rect.x + direction,player.rect.y + 115)))
     for wall in walls:
         pygame.draw.rect(screen,'blue',wall.rect)
-    for bullet in player.bullets:
-         pygame.draw.rect(screen, 'red', bullet.rect)
     pygame.display.flip()
     clock.tick(FPS)
 
