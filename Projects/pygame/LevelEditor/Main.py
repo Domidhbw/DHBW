@@ -2,20 +2,24 @@ import pygame
 from listGenerator import LevelGenerator
 from menu import selectMenu
 
+
 pygame.init()
 screen = pygame.display.set_mode((1200, 600))
 clock = pygame.time.Clock()
 running = True
 
 level = LevelGenerator()
+level.createLevel()
 menu = selectMenu()
+reloadLevel = False
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            menu.handleMouse(pygame.mouse.get_pos())
+            if menu.handleMouse(pygame.mouse.get_pos(),level.currentShift):
+                reloadLevel = True
     
     level.update()
 
@@ -24,6 +28,10 @@ while running:
     level.drawLevel(screen)
     menu.drawMenu(screen)
     menu.drawTheTilesOnTheMenu(screen)
+
+    if reloadLevel:
+        level.createLevel()
+        reloadLevel = False
 
     pygame.display.flip()
 

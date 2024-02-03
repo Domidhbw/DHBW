@@ -1,10 +1,14 @@
 level_map=[
-'',
-'  i sssss',
-'      ff     xxx',
-'            xxxx',
-'xxxxxxxxxx    ',
-'xxxxxxxxxx    ',
+'x                ',
+'  i sssss        ',
+'      ff     xxx ',
+'            xxxx ',
+'xxxxxxxxxx       ',
+'xxxxxxxxxx       ',
+'xxxxxxxxxx       ',
+'xxxxxxxxxx       ',
+'xxxxxxxxxx       ',
+'xxxxxxxxxx       ',
 ]
 tiles = {
     'o': 'Black',

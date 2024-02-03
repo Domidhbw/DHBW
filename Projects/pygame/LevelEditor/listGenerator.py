@@ -6,8 +6,9 @@ class LevelGenerator:
     def __init__(self) -> None:
         self.LevelData = level_map
         self.tileManager = TileManager()
-        self.level = self.createLevel()
+        self.level = list()
         self.shift = pygame.Vector2()
+        self.currentShift = pygame.Vector2()
 
     def getInput(self):
         keys = pygame.key.get_pressed()
@@ -25,12 +26,13 @@ class LevelGenerator:
             self.shift.y = 0
 
     def createLevel(self):
-        level = list()
+        self.level = list()
+        self.currentShift = pygame.Vector2(0,0)
         for rowIndex,row in enumerate(self.LevelData):
             for colIndex,cell in enumerate(row):
                 if not cell == " " or cell == 'o':
-                    level.append(self.tileManager.createTile(cell, colIndex * tilsize, rowIndex * tilsize))
-        return level
+                    self.level.append(self.tileManager.createTile(cell, colIndex * tilsize, rowIndex * tilsize))
+
 
     def drawLevel(self,surface):
         for tile in self.level:
@@ -40,6 +42,8 @@ class LevelGenerator:
     def updateTilesPosition(self):
         for tile in self.level:
             tile.rect.update(tile.rect.left + self.shift.x,tile.rect.top + self.shift.y,tile.rect.width,tile.rect.height)
+            self.currentShift.x += self.shift.x
+            self.currentShift.y += self.shift.y
 
     def update(self):
         self.getInput()

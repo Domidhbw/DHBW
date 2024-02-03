@@ -1,6 +1,7 @@
 import pygame
 from testLevel import *
 from TileManager import TileManager
+import math
 
 class selectMenu:
     def __init__(self) -> None:
@@ -35,7 +36,7 @@ class selectMenu:
             pygame.draw.rect(surface,tile.color,tile.rect)
             y += 80
         
-    def handleMouse(self,mousePos):
+    def handleMouse(self,mousePos,shift):
         if self.upRect.collidepoint(mousePos):
             if self.selectedItems[1] > 3:
                 self.selectedItems[0] -= 1
@@ -50,7 +51,35 @@ class selectMenu:
             if tile.rect.collidepoint(mousePos):
                 self.activeTile = tile.char
         if not self.menuBackground.collidepoint(mousePos):
-            print('outside menu')
+            self.placeTile(mousePos,shift)
+            return True
+
+    def placeTile(self,mousePos,shift):
+        posToPlaceCharAt = self.calculateXandYtoPlace(mousePos)
+        posToPlaceCharAt += self.roundTheShift(shift)
+        print(self.roundTheShift(shift))
+        self.placeTileInFile(posToPlaceCharAt)
+    
+    def roundTheShift(self,shift):
+        print('shift' + str(shift))
+        return pygame.Vector2(math.ceil(shift.x/2205),math.ceil(shift.y/2205))
+
+    def placeTileInFile(self,position):
+        print(position)
+        for rowIndex, row in enumerate(level_map):
+            if rowIndex == position.y -1:
+                for colIndex, cell in enumerate(row):
+                    if colIndex == position.x -1:
+                        # Reconstruct the string with the replacement
+                        updated_row = row[:colIndex] + self.activeTile + row[colIndex + 1:]
+                        # Update the row in level_map
+                        level_map[rowIndex] = updated_row
+
+
+                        
+
+    def calculateXandYtoPlace(self,mousePos):
+        return pygame.Vector2(math.ceil(mousePos[0]/64),math.ceil(mousePos[1]/64))
 
 
     
