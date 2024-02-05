@@ -27,11 +27,10 @@ class LevelGenerator:
 
     def createLevel(self):
         self.level = list()
-        self.currentShift = pygame.Vector2(0,0)
         for rowIndex,row in enumerate(self.LevelData):
             for colIndex,cell in enumerate(row):
                 if not cell == " " or cell == 'o':
-                    self.level.append(self.tileManager.createTile(cell, colIndex * tilsize, rowIndex * tilsize))
+                    self.level.append(self.tileManager.createTile(cell, colIndex * tilsize , rowIndex * tilsize))
 
 
     def drawLevel(self,surface):

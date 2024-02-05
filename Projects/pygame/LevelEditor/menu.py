@@ -16,11 +16,13 @@ class selectMenu:
         self.createTilesAndAssignThemToList()
         self.activeTiles = self.tiles[self.selectedItems[0]:self.selectedItems[1]]
         self.menuBackground = pygame.rect.Rect((1100,0,100,600))
+        self.saveButton = pygame.rect.Rect(1120,5,50,20)            
 
     def drawMenu(self,screen):
         pygame.draw.rect(screen,'red',self.menuBackground)
         pygame.draw.polygon(screen, (0, 255, 255), self.upButton)
         pygame.draw.polygon(screen, (0, 255, 255), self.downButton)
+        pygame.draw.rect(screen,'blue',self.saveButton)
 
     def createTilesAndAssignThemToList(self):
         chars = list(tiles.keys())
@@ -37,6 +39,9 @@ class selectMenu:
             y += 80
         
     def handleMouse(self,mousePos,shift):
+        if self.saveButton.collidepoint(mousePos):
+            self.saveToFile()
+            pass
         if self.upRect.collidepoint(mousePos):
             if self.selectedItems[1] > 3:
                 self.selectedItems[0] -= 1
@@ -55,34 +60,41 @@ class selectMenu:
             return True
 
     def placeTile(self,mousePos,shift):
+        shift.x = -shift.x
         posToPlaceCharAt = self.calculateXandYtoPlace(mousePos)
-        posToPlaceCharAt += self.roundTheShift(shift)
-        print(self.roundTheShift(shift))
-        self.placeTileInFile(posToPlaceCharAt)
+        self.placeTileConsideringShift(posToPlaceCharAt,shift)
     
-    def roundTheShift(self,shift):
-        print('shift' + str(shift))
-        return pygame.Vector2(math.ceil(shift.x/2205),math.ceil(shift.y/2205))
 
-    def placeTileInFile(self,position):
-        print(position)
-        for rowIndex, row in enumerate(level_map):
-            if rowIndex == position.y -1:
-                for colIndex, cell in enumerate(row):
-                    if colIndex == position.x -1:
-                        # Reconstruct the string with the replacement
-                        updated_row = row[:colIndex] + self.activeTile + row[colIndex + 1:]
-                        # Update the row in level_map
-                        level_map[rowIndex] = updated_row
+    def placeTileConsideringShift(self, screen_position, currentShift):
+        # Convert screen position to world coordinates by adding the shift
+
+        world_position_x = screen_position.x -1 
+        world_position_y = screen_position.y -1 
+
+        # Ensure world positions are within level bounds
+        world_position_x = int(max(0, min(world_position_x, len(level_map[0]) - 1)))
+        world_position_y = int(max(0, min(world_position_y, len(level_map) - 1)))
+
+        # Find and update the specific cell in world coordinates
+        if 0 <= world_position_y < len(level_map) and 0 <= world_position_x < len(level_map[0]):
+            row = level_map[world_position_y]
+            updated_row = row[:world_position_x] + self.activeTile + row[world_position_x + 1:]
+            level_map[world_position_y] = updated_row
+        else:
+            print(f"Position out of bounds: {world_position_x}, {world_position_y}")
 
 
-                        
 
     def calculateXandYtoPlace(self,mousePos):
         return pygame.Vector2(math.ceil(mousePos[0]/64),math.ceil(mousePos[1]/64))
 
 
-    
+    def saveToFile(self):
+        f = open('level.txt','w')
+        for item in level_map:
+            f.write('\''+ item+'\'' + ',' +'\n')
+        print(level_map)
+        pass
         
         
     
