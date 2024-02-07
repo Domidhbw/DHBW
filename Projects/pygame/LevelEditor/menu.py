@@ -7,16 +7,16 @@ class selectMenu:
     def __init__(self) -> None:
         self.selectedItems = [0,3]
         self.tiles = list()
-        self.upRect = pygame.rect.Rect(1120,50,60,50)
-        self.upButton = [[1120,100],[1150,50],[1180,100]]
-        self.downRect = pygame.rect.Rect(1120,500,60,50)
-        self.downButton = [[1120,500],[1150,550],[1180,500]]
+        self.upRect = pygame.rect.Rect(1720,50,60,50)
+        self.upButton = [[1720,100],[1750,50],[1780,100]]
+        self.downRect = pygame.rect.Rect(1720,500,60,50)
+        self.downButton = [[1720,500],[1750,550],[1780,500]]
         self.activeTile = 'x'
         self.tileManager = TileManager()
         self.createTilesAndAssignThemToList()
         self.activeTiles = self.tiles[self.selectedItems[0]:self.selectedItems[1]]
-        self.menuBackground = pygame.rect.Rect((1100,0,100,600))
-        self.saveButton = pygame.rect.Rect(1120,5,50,20)            
+        self.menuBackground = pygame.rect.Rect((1700,0,100,600))
+        self.saveButton = pygame.rect.Rect(1720,5,50,20)            
 
     def drawMenu(self,screen):
         pygame.draw.rect(screen,'red',self.menuBackground)
@@ -30,12 +30,12 @@ class selectMenu:
             self.tiles.append(self.tileManager.createTile(char,0,0))
         
     def drawTheTilesOnTheMenu(self,surface):
-        x = 1110
+        x = 1710
         y = 200
         for tile in self.activeTiles:
             tile.rect.x = x
             tile.rect.y = y
-            pygame.draw.rect(surface,tile.color,tile.rect)
+            surface.blit(tile.sprite,(tile.rect.x,tile.rect.y))
             y += 80
         
     def handleMouse(self,mousePos,shift):
@@ -92,8 +92,10 @@ class selectMenu:
     def saveToFile(self):
         f = open('level.txt','w')
         for item in level_map:
-            f.write('\''+ item+'\'' + ',' +'\n')
-        print(level_map)
+            print(item)
+            moditem = item.replace('o',' ')
+            f.write('\''+ moditem+'\'' + ',' +'\n')
+       
         pass
         
         

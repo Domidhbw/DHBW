@@ -35,8 +35,7 @@ class LevelGenerator:
 
     def drawLevel(self,surface):
         for tile in self.level:
-            pygame.draw.rect(surface,tile.color,tile.rect,0)
-            pygame.draw.rect(surface,'white',tile.rect,1)
+            surface.blit(tile.sprite,(tile.rect.x,tile.rect.y))
 
     def updateTilesPosition(self):
         for tile in self.level:

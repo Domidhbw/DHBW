@@ -4,7 +4,7 @@ from menu import selectMenu
 
 
 pygame.init()
-screen = pygame.display.set_mode((1200, 600))
+screen = pygame.display.set_mode((1800,900))
 clock = pygame.time.Clock()
 running = True
 
