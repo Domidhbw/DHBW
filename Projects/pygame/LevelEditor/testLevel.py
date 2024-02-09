@@ -7,12 +7,12 @@ level_map=[
 '                           ',
 '                           ',
 '                           ',
-'   x  x                    ',
-'    x                      ',
 '                           ',
-' vv                        ',
-'xxxxx  xxxxx               ',
-'xxxxx  xxxxx               ',
+'                           ',
+'                           ',
+'                           ',
+'                           ',
+'                           ',
 ]
 tiles = {
     'o': './assets/black.png',
@@ -35,6 +35,7 @@ tiles = {
     'i': './assets/AcidtopTileLeftBottomCorner.png',
     'h': './assets/AcidtopTileLeftCorner.png',
     'g': './assets/AcidtopTileRightBottomCorner.png',
-
+    'f': './assets/FinishLine.png',
+    'e': './assets/jumpTile.png'
 }
 tilsize = 64
