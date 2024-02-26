@@ -1,18 +1,18 @@
 level_map=[
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
-'                           ',
+' rmmmmmmmqrmmmmmmmmquuuuuuuu ',
+' n       pn        puuuuuuuu ',
+' n       pn        puuuuuuuu ',
+' n       pn        puuuuuuuu ',
+' n  wvvvvtn   hj   puuuuuuuu ',
+' n  zmmmmqn   pn   puuuuuuuu ',
+' n       pn   pn   zmmmmuuuu ',
+' n       iy   pn      f uuuu ',
+' n            pn        uuuu ',
+' n            pn   wvvvvuuuu ',
+' n            pn   puuuuuuuu ',
+' skkkkkvvvkvevtskkktuuuuuuuu ',
+' uuuuuuuuuuuuuuuuuuuuuuuuuuu ',
+' uuuuuuuuuuuuuuuuuuuuuuuuuuu ',
 ]
 tiles = {
     'o': './assets/black.png',
@@ -33,9 +33,13 @@ tiles = {
     'k': './assets/AcidTopTile.png',
     'j': './assets/AcidCorner_rechts_oben.png',
     'i': './assets/AcidtopTileLeftBottomCorner.png',
-    'h': './assets/AcidtopTileLeftCorner.png',
+    'h': './assets/AcidtopTileLeft.png',
     'g': './assets/AcidtopTileRightBottomCorner.png',
     'f': './assets/FinishLine.png',
-    'e': './assets/jumpTile.png'
+    'e': './assets/jumpTile.png',
+    'b': './assets/ArrowDown.png',
+    'c': './assets/ArrowRight.png',
+    'd': './assets/ArrowUp.png'
+
 }
 tilsize = 64
